@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Logística y Sedes";
+}
+
+<div class="row mb-4 align-items-center">
+    <div class="col-12">
+        <h1 class="text-dark fw-bold mb-1">
+            <i class="fa-solid fa-truck-fast me-2 text-gold"></i> Operaciones y Sedes
+        </h1>
+        <p class="text-muted fs-5">Módulo de implementación para el patrón <b>Adapter</b>.</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-4 justify-content-center">
+    <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card card-mundial w-100 p-4 shadow-sm bg-white border-top-0 border-start border-4 border-info text-center">
+            <h5 class="text-dark fw-bold border-bottom pb-2 mb-3"><i class="fa-solid fa-cloud-sun me-2 text-info"></i> Sistema Meteorológico</h5>
+            <p class="text-muted small mb-4">El patrón <b>Adapter</b> traduce los datos Legacy simulados al sistema del estadio (Celsius).</p>
+
+            <div class="mt-auto">
+                <h1 class="display-3 fw-bold text-dark">@ViewBag.TemperaturaCelsius°C</h1>
+                <span class="badge bg-info text-dark px-3 py-2 fs-6 mt-2">@ViewBag.CondicionClima</span>
+            </div>
+        </div>
+    </div>
+</div>

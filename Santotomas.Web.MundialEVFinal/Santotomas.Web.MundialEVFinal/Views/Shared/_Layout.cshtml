@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Panel Corporativo Mundial 2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            color: #1e293b;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .navbar-mundial {
+            background-color: #0f172a;
+            border-bottom: 4px solid #c29b38;
+        }
+
+        .nav-link {
+            color: #94a3b8 !important;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+            .nav-link:hover {
+                color: #D4AF37 !important;
+            }
+
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+
+        /* Estilo de Tarjetas Claras de Alto Impacto */
+        .card-mundial {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #c29b38;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .text-gold {
+            color: #b58920;
+        }
+
+        .text-green {
+            color: #16a34a;
+        }
+
+        .badge-posicion {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #0284c7;
+        }
+
+        footer {
+            background-color: #ffffff;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-mundial py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 text-white" href="@Url.Action("Index", "Home")">
+                <i class="fa-solid fa-trophy me-2 text-gold"></i> MUNDIAL APP
+            </a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link px-3" href="@Url.Action("Index", "Home")"><i class="fa-solid fa-chart-pie me-1"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="@Url.Action("MiEquipo", "Home")"><i class="fa-solid fa-users-gear me-1"></i> Mi Selección</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="@Url.Action("Logistica", "Home")"><i class="fa-solid fa-truck-fast me-1"></i> Logística</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        @RenderBody()
+    </div>
+
+    <footer class="text-center mt-5 py-4 border-top border-light shadow-sm">
+        <p class="mb-0 fw-semibold">Copa del Mundo 2026 — Panel de Control de Arquitectura C#</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
