@@ -4,16 +4,17 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Santotomas.Web.MundialEVFinal.Patrones;
 
 namespace Santotomas.Web.MundialEVFinal.Repository
 {
     public class ChannelRepository
     {
-        private readonly string _connectionString;
+        private readonly IConexionFactory _conexionFactory;
 
         public ChannelRepository()
         {
-            this._connectionString = ConfigurationManager.ConnectionStrings["MundialConnection"].ConnectionString;
+            _conexionFactory = new SqlMundialFactory();
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace Santotomas.Web.MundialEVFinal.Repository
         {
             var tabla = new DataTable();
 
-            using (var conexion = new SqlConnection(_connectionString))
+            using (var conexion = _conexionFactory.CrearConexion())
             using (var comando = new SqlCommand("SELECT Nombre, Region, GolesAnotados, CodigoIso FROM Paises", conexion))
             using (var adaptador = new SqlDataAdapter(comando))
             {
