@@ -124,6 +124,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Patrones\Creacionales\ArqueroFactory.cs" />
+    <Compile Include="Patrones\Creacionales\DelanteroFactory.cs" />
     <Compile Include="Patrones\Creacionales\SqlMundialFactory.cs" />
     <Compile Include="Patrones\EstadoMundial.cs" />
     <Compile Include="Models\Views\JugadorViewModel.cs" />
