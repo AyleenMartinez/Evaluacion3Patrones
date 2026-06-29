@@ -10,8 +10,15 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
 {
     public class HomeController : Controller
     {
-        // Instancia del repositorio con los datos simulados
+        // Instancia del repositorio para acceeder a los datos
         private readonly ChannelRepository _repository = new ChannelRepository();
+
+        private readonly Dictionary<string, IJugadorFactory> _fabricasDeJugadores =
+            new Dictionary<string, IJugadorFactory>
+            {
+                { "Arquero", new ArqueroFactory() },
+                { "Delantero", new DelanteroFactory() }
+            };
 
         public ActionResult Index()
         {
@@ -96,16 +103,11 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
         [HttpPost]
         public ActionResult ConvocarJugador(string tipoPosicion)
         {
-
-            // Diccionario de fabricas para crear jugadores sin usar switch ni if
-            var fabricasDeJugadores = new Dictionary<string, IJugadorFactory>
-            {
-                { "Arquero", new ArqueroFactory() },
-                { "Delantero", new DelanteroFactory() }
-            };
-
             // Se obtiene la fabrica según la llave enviada desde el formulario
-            var nuevoJugador = fabricasDeJugadores[tipoPosicion].CrearJugador();
+            var nuevoJugador = _fabricasDeJugadores[tipoPosicion].CrearJugador();
+
+            // Se guarda el jugador creado para que aparezca en la plantilla
+            _repository.AgregarJugador(nuevoJugador);
 
             // Se mantiene la lógica del Singleton que venía en el controlador
             EstadoMundial.Instancia.RegistrarGol();

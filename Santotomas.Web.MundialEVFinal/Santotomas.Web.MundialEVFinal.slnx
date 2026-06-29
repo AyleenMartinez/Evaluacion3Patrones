@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Santotomas.Web.MundialEVFinal.Tests/Santotomas.Web.MundialEVFinal.Tests.csproj" Id="bdffad47-fcb1-4ebf-8002-6d8113a7aba7" />
   <Project Path="Santotomas.Web.MundialEVFinal/Santotomas.Web.MundialEVFinal.csproj" Id="baaaed4b-7a65-4d06-9bf9-cced0866f660" />
 </Solution>

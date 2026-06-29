@@ -14,7 +14,7 @@ namespace Santotomas.Web.MundialEVFinal.Repository
             _conexionFactory = new SqlMundialFactory();
         }
 
-        #region Codigo original 
+        #region Codigo original ObtenerPaises
 
         /*
         public IEnumerable<PaisMock> ObtenerPaises()
@@ -126,6 +126,37 @@ namespace Santotomas.Web.MundialEVFinal.Repository
                     comando.CommandText = "SELECT ISNULL(SUM(GolesAnotados), 0) FROM Paises";
 
                     return Convert.ToInt32(comando.ExecuteScalar());
+                }
+            }
+        }
+
+        // Agrega un jugador nuevo a la base de datos usando la factory de conexión
+        public void AgregarJugador(JugadorMock jugador)
+        {
+            using (var conexion = _conexionFactory.CrearConexion())
+            {
+                conexion.Open();
+
+                using (var comando = conexion.CreateCommand())
+                {
+                    comando.CommandText = "INSERT INTO Jugadores (Numero, Nombre, Rol, IdPais) VALUES (@Numero, @Nombre, @Rol, 3)";
+
+                    var parametroNumero = comando.CreateParameter();
+                    parametroNumero.ParameterName = "@Numero";
+                    parametroNumero.Value = jugador.Numero;
+                    comando.Parameters.Add(parametroNumero);
+
+                    var parametroNombre = comando.CreateParameter();
+                    parametroNombre.ParameterName = "@Nombre";
+                    parametroNombre.Value = jugador.Nombre;
+                    comando.Parameters.Add(parametroNombre);
+
+                    var parametroRol = comando.CreateParameter();
+                    parametroRol.ParameterName = "@Rol";
+                    parametroRol.Value = jugador.Rol;
+                    comando.Parameters.Add(parametroRol);
+
+                    comando.ExecuteNonQuery();
                 }
             }
         }
