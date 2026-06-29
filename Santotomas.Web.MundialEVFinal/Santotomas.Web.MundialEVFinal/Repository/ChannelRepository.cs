@@ -1,10 +1,7 @@
 ﻿using Santotomas.Web.MundialEVFinal.Models.Mocks;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using Santotomas.Web.MundialEVFinal.Patrones;
+using System;
+using System.Collections.Generic;
 
 namespace Santotomas.Web.MundialEVFinal.Repository
 {
@@ -17,10 +14,9 @@ namespace Santotomas.Web.MundialEVFinal.Repository
             _conexionFactory = new SqlMundialFactory();
         }
 
-        /// <summary>
-        /// Método que obtiene la lista de países desde la base de datos y los mapea a objetos PaisMock.
-        /// </summary>
-        /// <returns>Una colección de objetos PaisMock que representan los países.</returns>
+        #region Codigo original 
+
+        /*
         public IEnumerable<PaisMock> ObtenerPaises()
         {
             var tabla = new DataTable();
@@ -41,8 +37,6 @@ namespace Santotomas.Web.MundialEVFinal.Repository
             }).ToList();
         }
 
-        // Retorna la plantilla inicial para probar el Iterator
-        // MODIFICAR ESTE MÉTODO PARA QUE OBTENGAN LOS JUGADORES DESDE LA BASE DE DATOS
         public IEnumerable<JugadorMock> ObtenerJugadores()
         {
             return new List<JugadorMock>
@@ -52,6 +46,72 @@ namespace Santotomas.Web.MundialEVFinal.Repository
                 new JugadorMock { Numero = 8, Nombre = "A. Vidal", Rol = "Mediocampista" },
                 new JugadorMock { Numero = 10, Nombre = "A. Sánchez", Rol = "Delantero" }
             };
+        }
+        */
+
+        #endregion
+
+        // Obtiene los paises desde la base de datos usando la factory
+        public IEnumerable<PaisMock> ObtenerPaises()
+        {
+            var paises = new List<PaisMock>();
+
+            using (var conexion = _conexionFactory.CrearConexion())
+            {
+                conexion.Open();
+
+                using (var comando = conexion.CreateCommand())
+                {
+                    comando.CommandText = "SELECT Nombre, Region, GolesAnotados, CodigoIso FROM Paises";
+
+                    using (var lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            paises.Add(new PaisMock
+                            {
+                                Nombre = lector["Nombre"].ToString(),
+                                Region = lector["Region"].ToString(),
+                                GolesAnotados = Convert.ToInt32(lector["GolesAnotados"]),
+                                CodigoIso = lector["CodigoIso"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return paises;
+        }
+
+        // Obtiene los jugadores desde la base de datos usando la factory
+        public IEnumerable<JugadorMock> ObtenerJugadores()
+        {
+            var jugadores = new List<JugadorMock>();
+
+            using (var conexion = _conexionFactory.CrearConexion())
+            {
+                conexion.Open();
+
+                using (var comando = conexion.CreateCommand())
+                {
+                    comando.CommandText = "SELECT Numero, Nombre, Rol FROM Jugadores WHERE IdPais = 3 ORDER BY Numero";
+
+                    using (var lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            jugadores.Add(new JugadorMock
+                            {
+                                Numero = Convert.ToInt32(lector["Numero"]),
+                                Nombre = lector["Nombre"].ToString(),
+                                Rol = lector["Rol"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return jugadores;
         }
     }
 }
