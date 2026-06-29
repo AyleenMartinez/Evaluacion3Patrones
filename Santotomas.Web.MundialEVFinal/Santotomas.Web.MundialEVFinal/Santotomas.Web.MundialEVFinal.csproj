@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Patrones\Comportamiento\PlantillaIterator.cs" />
     <Compile Include="Patrones\Creacionales\ArqueroFactory.cs" />
     <Compile Include="Patrones\Creacionales\DelanteroFactory.cs" />
     <Compile Include="Patrones\Creacionales\SqlMundialFactory.cs" />
@@ -190,7 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Patrones\Comportamiento\" />
     <Folder Include="Patrones\Estructurales\" />
   </ItemGroup>
   <ItemGroup>

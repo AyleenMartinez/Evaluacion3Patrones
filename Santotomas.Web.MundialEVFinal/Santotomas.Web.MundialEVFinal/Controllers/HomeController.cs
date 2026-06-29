@@ -30,6 +30,8 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             return View(selecciones);
         }
 
+        #region codigo anterior MiEquipo
+        /*
         public ActionResult MiEquipo()
         {
             // TAREA ITERATOR: reemplazar la lectura directa
@@ -42,9 +44,31 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             });
 
             return View(plantilla);
+        } */
+        #endregion
+
+        public ActionResult MiEquipo()
+        {
+            // TAREA ITERATOR: se recorre la plantilla usando TieneSiguiente() y Siguiente()
+            var iterator = new PlantillaIterator(_repository.ObtenerJugadores());
+            var plantilla = new List<JugadorViewModel>();
+
+            while (iterator.TieneSiguiente())
+            {
+                var jugador = iterator.Siguiente();
+
+                plantilla.Add(new JugadorViewModel
+                {
+                    Dorsal = jugador.Numero,
+                    Nombre = jugador.Nombre,
+                    Posicion = jugador.Rol
+                });
+            }
+
+            return View(plantilla);
         }
 
-        #region Codigo original
+        #region Codigo original ConvocarJugador
         /*
         [HttpPost]
         public ActionResult ConvocarJugador(string tipoPosicion)
