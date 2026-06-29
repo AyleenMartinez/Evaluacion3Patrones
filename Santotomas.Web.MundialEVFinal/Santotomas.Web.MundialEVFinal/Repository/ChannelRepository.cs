@@ -113,5 +113,21 @@ namespace Santotomas.Web.MundialEVFinal.Repository
 
             return jugadores;
         }
+
+        // Obtiene la suma total de goles desde la base de datos
+        public int ObtenerTotalGolesHistoricos()
+        {
+            using (var conexion = _conexionFactory.CrearConexion())
+            {
+                conexion.Open();
+
+                using (var comando = conexion.CreateCommand())
+                {
+                    comando.CommandText = "SELECT ISNULL(SUM(GolesAnotados), 0) FROM Paises";
+
+                    return Convert.ToInt32(comando.ExecuteScalar());
+                }
+            }
+        }
     }
 }
