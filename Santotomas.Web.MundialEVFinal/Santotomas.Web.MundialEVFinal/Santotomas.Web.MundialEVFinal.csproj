@@ -134,6 +134,8 @@
     <Compile Include="Models\Mocks\PaisMock.cs" />
     <Compile Include="Models\Views\SeleccionViewModel.cs" />
     <Compile Include="Patrones\ContratosPatrones.cs" />
+    <Compile Include="Patrones\Estructurales\ClimaAdapter.cs" />
+    <Compile Include="Patrones\Estructurales\ServicioClimaAntiguo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ChannelRepository.cs" />
   </ItemGroup>
@@ -191,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Patrones\Estructurales\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

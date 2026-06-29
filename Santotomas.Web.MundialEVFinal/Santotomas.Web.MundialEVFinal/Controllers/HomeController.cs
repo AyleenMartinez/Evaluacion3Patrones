@@ -113,11 +113,29 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             return RedirectToAction("MiEquipo");
         }
 
+        #region Codigo original Logistica
+
+        /*
         public ActionResult Logistica()
         {
             // TAREA ADAPTER: Reemplazar este dummy por su Adapter real
             // que consuma la clase simulada ServicioClimaAntiguo en grados Fahrenheit.
             ViewBag.TemperaturaCelsius = 22;
+            ViewBag.CondicionClima = "Soleado";
+
+            return View();
+        }
+        */
+
+        #endregion
+
+        public ActionResult Logistica()
+        {
+            // TAREA ADAPTER: se usa el adaptador para convertir Fahrenheit a Celsius
+            ServicioClimaAntiguo servicioAntiguo = new ServicioClimaAntiguo();
+            IClimaTorneo clima = new ClimaAdapter(servicioAntiguo);
+
+            ViewBag.TemperaturaCelsius = clima.ObtenerTemperaturaCelsius();
             ViewBag.CondicionClima = "Soleado";
 
             return View();
