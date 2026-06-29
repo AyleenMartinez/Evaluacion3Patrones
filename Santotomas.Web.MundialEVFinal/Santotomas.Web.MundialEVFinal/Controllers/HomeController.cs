@@ -37,22 +37,7 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             return View(selecciones);
         }
 
-        #region codigo anterior MiEquipo
-        /*
-        public ActionResult MiEquipo()
-        {
-            // TAREA ITERATOR: reemplazar la lectura directa
-            // del repositorio por su propia implementación del patrón Iterator.
-            var plantilla = _repository.ObtenerJugadores().Select(j => new JugadorViewModel
-            {
-                Dorsal = j.Numero,
-                Nombre = j.Nombre,
-                Posicion = j.Rol
-            });
-
-            return View(plantilla);
-        } */
-        #endregion
+    
 
         public ActionResult MiEquipo()
         {
@@ -75,30 +60,7 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             return View(plantilla);
         }
 
-        #region Codigo original ConvocarJugador
-        /*
-        [HttpPost]
-        public ActionResult ConvocarJugador(string tipoPosicion)
-        {
-            //TAREA FACTORY METHOD: Resolución de objetos sin usar 'switch' ni 'if'.
-            //Reemplazar el valor "null" por el llamado a sus propias fábricas.
-            var fabricasDeJugadores = new Dictionary<string, Func<object>>
-            {
-                { "Arquero", () =>  null },
-                { "Delantero", () =>  null }
-            };
-
-            // Ejecución polimórfica directa (la llave "tipoPosicion" viene del formulario HTML)
-            var nuevoJugador = fabricasDeJugadores[tipoPosicion].Invoke();
-
-            // Simulamos que al convocar un jugador se anota un gol en el entrenamiento
-            // para que los alumnos vean el patrón Singleton actualizando el Dashboard en vivo.
-            EstadoMundial.Instancia.RegistrarGol();
-
-            return RedirectToAction("MiEquipo");
-        }
-        */
-        #endregion
+   
 
         [HttpPost]
         public ActionResult ConvocarJugador(string tipoPosicion)
@@ -115,27 +77,12 @@ namespace Santotomas.Web.MundialEVFinal.Controllers
             return RedirectToAction("MiEquipo");
         }
 
-        #region Codigo original Logistica
 
-        /*
-        public ActionResult Logistica()
-        {
-            // TAREA ADAPTER: Reemplazar este dummy por su Adapter real
-            // que consuma la clase simulada ServicioClimaAntiguo en grados Fahrenheit.
-            ViewBag.TemperaturaCelsius = 22;
-            ViewBag.CondicionClima = "Soleado";
-
-            return View();
-        }
-        */
-
-        #endregion
 
         public ActionResult Logistica()
         {
             // TAREA ADAPTER: se usa el adaptador para convertir Fahrenheit a Celsius
-            ServicioClimaAntiguo servicioAntiguo = new ServicioClimaAntiguo();
-            IClimaTorneo clima = new ClimaAdapter(servicioAntiguo);
+            IClimaTorneo clima = new ClimaAdapter();
 
             ViewBag.TemperaturaCelsius = clima.ObtenerTemperaturaCelsius();
             ViewBag.CondicionClima = "Soleado";

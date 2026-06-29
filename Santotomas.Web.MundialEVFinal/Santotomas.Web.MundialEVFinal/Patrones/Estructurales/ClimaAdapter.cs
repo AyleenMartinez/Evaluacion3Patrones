@@ -4,6 +4,11 @@
     {
         private readonly ServicioClimaAntiguo _servicioAntiguo;
 
+        public ClimaAdapter()
+        {
+            _servicioAntiguo = new ServicioClimaAntiguo();
+        }
+
         public ClimaAdapter(ServicioClimaAntiguo servicioAntiguo)
         {
             _servicioAntiguo = servicioAntiguo;
